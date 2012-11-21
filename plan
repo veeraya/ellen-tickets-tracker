@@ -1,0 +1,306 @@
+ellen adventure!!
+
+jcalendar....trying to figure out the code. Nokogiri won't work because it's not a direct javascript link.
+try doing
+jQuery.J.ChangeMonth(new Date().addMonths(1));
+doesn't work! doesn't get pdated...hmmm
+document.getElementsByClassName("link-next")[0].click(); okay works
+
+hmm how? selenium or watir? nah..gotta be better way. use tools....well seeing through each source code which one populate.
+
+of course i miss!
+
+copy + paste source code in. searched for fully booked..might be there. oh hello json!:)
+
+```
+var events
+ {"EventID": 1, "StartDateTime": "2012-11-01", "EndDateTime": "2012-11-01", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+
+no available yet. not too sure what the title is. nvm let's look at the class in the css.
+found this:
+
+#jMonthCalendar .tickets-available a:link,#jMonthCalendar .tickets-available a:visited {
+color:#FE3D3D;
+}
+
+#jMonthCalendar .coming-soon a:link,#jMonthCalendar .coming-soon a:visited {
+color:#406DC2;
+}
+```
+
+oh heyyy. nice! so now we can search for event with CssClass "coming-soon" or "tickets-available"
+
+awesome!!
+
+parsing javascript code? http://stackoverflow.com/questions/4940171/parsing-javascript-using-ruby-code
+scrape javascript variable? http://stackoverflow.com/questions/5701054/ruby-nokogiri-restclient-to-scrape-javascript-variable
+
+make into json
+
+print out. if yes email me! or sms me! do this every 10 minutes or so.
+
+set up cron job https://github.com/javan/whenever
+
+rails app. check every hour. store in database would be pretty nice?
+
+make this a service!
+
+so my goal is to do this in TDD manner! yes! write test!!!! testing...at least try to? so i will know when it breaks.
+
+
+
+json looks like this:
+
+    var events = [
+
+
+
+
+
+        {"EventID": 1, "StartDateTime": "2012-11-01", "EndDateTime": "2012-11-01", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 2, "StartDateTime": "2012-11-05", "EndDateTime": "2012-11-05", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 3, "StartDateTime": "2012-11-06", "EndDateTime": "2012-11-06", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 4, "StartDateTime": "2012-11-07", "EndDateTime": "2012-11-07", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 5, "StartDateTime": "2012-11-08", "EndDateTime": "2012-11-08", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 6, "StartDateTime": "2012-11-09", "EndDateTime": "2012-11-09", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 7, "StartDateTime": "2012-11-12", "EndDateTime": "2012-11-12", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 8, "StartDateTime": "2012-11-13", "EndDateTime": "2012-11-13", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 9, "StartDateTime": "2012-11-14", "EndDateTime": "2012-11-14", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 10, "StartDateTime": "2012-11-15", "EndDateTime": "2012-11-15", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 11, "StartDateTime": "2012-11-19", "EndDateTime": "2012-11-19", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 12, "StartDateTime": "2012-11-26", "EndDateTime": "2012-11-26", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 13, "StartDateTime": "2012-11-27", "EndDateTime": "2012-11-27", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 14, "StartDateTime": "2012-12-03", "EndDateTime": "2012-12-03", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 15, "StartDateTime": "2012-12-04", "EndDateTime": "2012-12-04", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 16, "StartDateTime": "2012-12-05", "EndDateTime": "2012-12-05", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 17, "StartDateTime": "2012-12-06", "EndDateTime": "2012-12-06", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 18, "StartDateTime": "2012-12-10", "EndDateTime": "2012-12-10", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 19, "StartDateTime": "2012-12-11", "EndDateTime": "2012-12-11", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 20, "StartDateTime": "2013-01-02", "EndDateTime": "2013-01-02", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 21, "StartDateTime": "2013-01-03", "EndDateTime": "2013-01-03", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 22, "StartDateTime": "2013-01-07", "EndDateTime": "2013-01-07", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 23, "StartDateTime": "2013-01-08", "EndDateTime": "2013-01-08", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 24, "StartDateTime": "2013-01-09", "EndDateTime": "2013-01-09", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 25, "StartDateTime": "2013-01-10", "EndDateTime": "2013-01-10", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 26, "StartDateTime": "2013-01-14", "EndDateTime": "2013-01-14", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 27, "StartDateTime": "2013-01-15", "EndDateTime": "2013-01-15", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 28, "StartDateTime": "2013-01-16", "EndDateTime": "2013-01-16", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 29, "StartDateTime": "2013-01-17", "EndDateTime": "2013-01-17", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 30, "StartDateTime": "2013-01-21", "EndDateTime": "2013-01-21", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 31, "StartDateTime": "2013-01-22", "EndDateTime": "2013-01-22", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 32, "StartDateTime": "2013-01-23", "EndDateTime": "2013-01-23", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 33, "StartDateTime": "2013-01-28", "EndDateTime": "2013-01-28", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 34, "StartDateTime": "2013-01-29", "EndDateTime": "2013-01-29", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 35, "StartDateTime": "2013-02-05", "EndDateTime": "2013-02-05", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+    ,
+
+
+
+
+
+        {"EventID": 36, "StartDateTime": "2013-02-06", "EndDateTime": "2013-02-06", "Title": "Fully<br/>Booked", "URL": "javascript:return false;", "Description": "", "CssClass": "fully-booked"}
+        ];
