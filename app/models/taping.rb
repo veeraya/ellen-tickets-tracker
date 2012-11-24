@@ -11,6 +11,6 @@
 
 class Taping < ActiveRecord::Base
   attr_accessible :taping_date, :ticket_status
-
+  has_many :ticketStatusChanges, dependent: :destroy
   validates :taping_date, presence:true, uniqueness:true
 end
