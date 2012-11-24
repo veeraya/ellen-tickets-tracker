@@ -1,6 +1,9 @@
 Ellen::Application.routes.draw do
   get "tapings/new"
 
+  resources :tapings
+  resource :ticketStatusChanges
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
