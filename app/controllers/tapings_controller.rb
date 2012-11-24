@@ -5,6 +5,8 @@ class TapingsController < ApplicationController
   end
 
   def show
+    @taping = Taping.find(params[:id])
+    @status_changes = @taping.ticketStatusChanges
   end
 
   def new
