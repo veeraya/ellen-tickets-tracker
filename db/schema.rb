@@ -15,9 +15,9 @@ ActiveRecord::Schema.define(:version => 20121124054006) do
 
   create_table "tapings", :force => true do |t|
     t.datetime "taping_date"
-    t.string   "ticket_availability"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.string   "ticket_status"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end
