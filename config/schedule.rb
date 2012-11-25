@@ -19,6 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-# every 30.seconds do
-#   rake "Taping.test", :output => 'cron.log'     
+# not for use with heroku!
+# every 1.minute do
+#   rake "scrape", :output => 'cron.log'     
 # end

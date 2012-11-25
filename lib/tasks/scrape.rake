@@ -10,7 +10,7 @@ task :scrape => :environment do
     events_data = events_data.match(/\[(.)+\]/m).to_s
     #parse!
     events_data = JSON.parse(events_data)
-    puts "Events are #{events_data}"
+    #puts "Events are #{events_data}"
 
     # attributes are as followed
     # EventID
@@ -21,21 +21,23 @@ task :scrape => :environment do
     # CssClass
     # the CssClass we want is "coming-soon" or "tickets-available"
 
-    tapings_with_changes = Array.new()
+    tapings_changed = Array.new()
     events_data.each do |event| 
       taping = Taping.find_by_taping_date("#{event['StartDateTime']}")
-      puts "searc1 #{taping}"
       taping = Taping.find_by_taping_date("#{event['StartDateTime']} 00:00:00") if taping.nil?
-      puts "serach2 #{taping}"
+      
       if taping.nil? #new entry
         taping = Taping.create(taping_date: "#{event['StartDateTime']}", ticket_status: "#{event['CssClass']}")
-        tapings_with_changes.push(taping)
+        tapings_changed.push(taping)
       elsif taping.ticket_status != event['CssClass']
           taping.ticket_status = event['CssClass']
           taping.save()
-          tapings_with_changes.push(taping)
+          tapings_changed.push(taping)
       end
     end
 
-    puts "there are #{tapings_with_changes.count} tapings with changes"
+    if tapings_changed.count > 0
+      UserMailer.notification_email(tapings_changed).deliver
+    end
+    puts "there are #{tapings_changed.count} tapings with changes"
 end
