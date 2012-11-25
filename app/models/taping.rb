@@ -5,6 +5,9 @@ class Taping < ActiveRecord::Base
   before_save :store_old_status
   after_commit :check_status_change
 
+  def test
+    puts Date.today()
+  end
 
   private
     def store_old_status
