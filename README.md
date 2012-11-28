@@ -10,7 +10,7 @@ Currently in its bare-bone stage.
 - Email me every time there's a change in ticket status
 - Store the list of changes in database for the purpose of visualization in the (near) future.
 
-###Feature wishlists
+###Features wishlist
 
 - Choose which ticket dates to subscribe to
 - Allow other people to use this app to subscribe to the notification as well.
