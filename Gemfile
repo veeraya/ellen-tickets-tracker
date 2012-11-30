@@ -6,7 +6,7 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem 'rspec-rails', '2.11.0'
 end
 
@@ -30,9 +30,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :production do
+#group :production do
   gem 'pg', '0.12.2'
-end
+#end
 
 gem 'whenever', :require => false
 
