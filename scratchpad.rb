@@ -1,53 +1,30 @@
-t = Taping.create(taping_date: Date.today, ticket_status: "available")
-t = Taping.create(taping_date: "2012-11-25", ticket_status: "not available")
+t = Ticket.create(date: Date.today, status: "available")
+t = Ticket.create(date: "2012-11-25", status: "not available")
 
 t.ticketStatusChanges.create()
 
+User.first.trackings.exists?(Tracking.first)
 
-# == Schema Information
-#
-# Table name: tapings
-#
-#  id                  :integer          not null, primary key
-#  taping_date         :datetime
-#  ticket_status :string(255)
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#
+# search for user who wants everything first.
 
-class Taping < ActiveRecord::Base
-  attr_accessible :taping_date, :ticket_status
-  has_many :ticketStatusChanges, dependent: :destroy
-  validates :taping_date, presence:true, uniqueness:true
-  before_save :store_old_status
-  after_commit :check_status_change
+# now we have list of date changed
+# check for all users with track_all = true and push  them in (User.find_by_track_all(true))
+# get tracking with the same date as user date
+# do @tracking.users to get an array of user. push them in and send email
 
+User.first.trackings.where(:date => Date.today)
 
-  private
-    def store_old_status
-      if self.ticket_status_changed?
-        @old_status = ticket_status_change[0]
-      else
-        @old_status = self.ticket_status
-      end
-    end
+Account.all(:conditions => { :id => [1, 2] })
 
-    def check_status_change
-      if self.ticket_status != @old_status
-        self.ticketStatusChanges.create(from_status: @old_status, to_status: self.ticket_status)
-      end
-    end
+# stefan must be proud!
+SELECT DISTINCT u.email 
+FROM trackings t, users u, trackings_users tu
+WHERE t.id = tu.tracking_id 
+AND u.id = tu.user_id 
+AND (t.date = '2012-12-01' OR t.date = '2012-12-10')
 
-end
-
-class CreateTapings < ActiveRecord::Migration
-  def change
-    create_table :tapings do |t|
-      t.date :taping_date
-      t.string :ticket_status
-      t.int :taping_id
-
-      t.timestamps
-    end
-  end
+query = "SELECT DISTINCT u.email FROM trackings t, users u, trackings_users tu WHERE t.id = tu.tracking_id AND u.id = tu.user_id AND (t.date = '2012-12-01' OR t.date = '2012-12-10')"
+result = ActiveRecord::Base.connection.execute(query)
+result.each do |r|
+  puts r["email"]
 end

@@ -65,15 +65,26 @@ Ellen::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  
+  # GMAIL SMTP setting  
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   :address              => "smtp.gmail.com",
   :port                 => 587,
+  :domain               => 'baci.lindsaar.net',
   :user_name            => ENV['GMAIL'],
   :password             => ENV['GMAIL_PASSWORD'],
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
+
+  # Configure Rails to use pry instead of IRB
+  silence_warnings do
+    begin
+      require 'pry'
+      IRB = Pry
+      rescue LoadError
+    end
+  end
+
 end
