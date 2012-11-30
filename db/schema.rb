@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121130075128) do
+ActiveRecord::Schema.define(:version => 20121130081909) do
 
-  create_table "ticket_status_changes", :force => true do |t|
+  create_table "status_changes", :force => true do |t|
     t.string   "from_status"
     t.string   "to_status"
     t.integer  "ticket_id"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20121130075128) do
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "ticket_status_changes", ["ticket_id", "created_at"], :name => "index_ticket_status_changes_on_taping_id_and_created_at"
+  add_index "status_changes", ["ticket_id", "created_at"], :name => "index_ticket_status_changes_on_taping_id_and_created_at"
 
   create_table "tickets", :force => true do |t|
     t.date     "date"
