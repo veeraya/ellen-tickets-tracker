@@ -21,23 +21,28 @@ task :scrape => :environment do
     # CssClass
     # the CssClass we want is "coming-soon" or "tickets-available"
 
-    tapings_changed = Array.new()
+    tickets_changed = Array.new()
     events_data.each do |event| 
-      taping = Taping.find_by_taping_date("#{event['StartDateTime']}")
-      taping = Taping.find_by_taping_date("#{event['StartDateTime']} 00:00:00") if taping.nil?
+      ticket = Ticket.find_by_date("#{event['StartDateTime']}")
+      ticket = Ticket.find_by_date("#{event['StartDateTime']} 00:00:00") if ticket.nil?
       
-      if taping.nil? #new entry
-        taping = Taping.create(taping_date: "#{event['StartDateTime']}", ticket_status: "#{event['CssClass']}")
-        tapings_changed.push(taping)
-      elsif taping.ticket_status != event['CssClass']
-          taping.ticket_status = event['CssClass']
-          taping.save()
-          tapings_changed.push(taping)
+      if ticket.nil? #new entry
+        ticket = Ticket.create(date: "#{event['StartDateTime']}", status: "#{event['CssClass']}")
+        tickets_changed.push(ticket)
+      elsif ticket.status != event['CssClass']
+          ticket.status = event['CssClass']
+          ticket.save()
+          tickets_changed.push(ticket)
       end
     end
 
-    if tapings_changed.count > 0
-      UserMailer.notification_email(tapings_changed).deliver
+    if tickets_changed.count > 0
+      UserMailer.notification_email(tickets_changed).deliver
     end
-    puts "there are #{tapings_changed.count} tapings with changes"
+
+    # log message
+    puts "there are #{tickets_changed.count} tickets with changes"
+    tickets_changed.each do |ticket|
+      puts "Date #{ticket.date} Status: #{ticket.status}"
+    end
 end
