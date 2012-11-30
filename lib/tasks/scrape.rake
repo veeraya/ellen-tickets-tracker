@@ -8,9 +8,7 @@ task :scrape => :environment do
     events_data = scripts.match(/var events(.)+(\];)/m).to_s
     #just the inside [ ]
     events_data = events_data.match(/\[(.)+\]/m).to_s
-    #parse!
     events_data = JSON.parse(events_data)
-    #puts "Events are #{events_data}"
 
     # attributes are as followed
     # EventID
