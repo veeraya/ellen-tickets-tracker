@@ -1,5 +1,25 @@
-<% @tickets.each do |t| %>
-<ul>
-  <li><%= t.date %> <%= t.status %></li>
-</ul>
+<h1>Listing tickets</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tickets.each do |ticket| %>
+  <tr>
+    <td><%= ticket.date %></td>
+    <td><%= ticket.status %></td>
+    <td><%= link_to 'Show', ticket %></td>
+    <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
+    <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
 <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ticket', new_ticket_path %>

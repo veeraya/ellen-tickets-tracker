@@ -1,2 +1,15 @@
-<%= @taping.taping_date %> <%= @taping.ticket_status %><br />
-<%= @status_changes %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @ticket.date %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @ticket.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Back', tickets_path %>
