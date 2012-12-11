@@ -1,5 +1,5 @@
 Ellen::Application.routes.draw do
-  get "tapings/new"
+  root :to => 'pages#index'
 
   resources :tickets
   resources :status_changes
