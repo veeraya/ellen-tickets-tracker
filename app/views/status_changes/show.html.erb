@@ -1,20 +1,25 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = StatusChange -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>From status:</b>
-  <%= @status_change.from_status %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:from_status) %>:</strong></dt>
+  <dd><%= @status_change.from_status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:to_status) %>:</strong></dt>
+  <dd><%= @status_change.to_status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:ticket_id) %>:</strong></dt>
+  <dd><%= @status_change.ticket_id %></dd>
+</dl>
 
-<p>
-  <b>To status:</b>
-  <%= @status_change.to_status %>
-</p>
-
-<p>
-  <b>Ticket:</b>
-  <%= @status_change.ticket_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_status_change_path(@status_change) %> |
-<%= link_to 'Back', status_changes_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              status_changes_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_status_change_path(@status_change), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              status_change_path(@status_change),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

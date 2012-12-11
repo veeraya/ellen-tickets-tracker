@@ -1,29 +1,26 @@
-<%= form_for(@status_change) do |f| %>
-  <% if @status_change.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@status_change.errors.count, "error") %> prohibited this status_change from being saved:</h2>
-
-      <ul>
-      <% @status_change.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @status_change, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :from_status, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :from_status, :class => 'text_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :to_status, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :to_status, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :ticket_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :ticket_id, :class => 'number_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :from_status %><br />
-    <%= f.text_field :from_status %>
-  </div>
-  <div class="field">
-    <%= f.label :to_status %><br />
-    <%= f.text_field :to_status %>
-  </div>
-  <div class="field">
-    <%= f.label :ticket_id %><br />
-    <%= f.text_field :ticket_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                status_changes_path, :class => 'btn' %>
   </div>
 <% end %>

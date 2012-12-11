@@ -1,27 +1,40 @@
-<h1>Listing status_changes</h1>
-
-<table>
-  <tr>
-    <th>From status</th>
-    <th>To status</th>
-    <th>Ticket</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @status_changes.each do |status_change| %>
-  <tr>
-    <td><%= status_change.from_status %></td>
-    <td><%= status_change.to_status %></td>
-    <td><%= status_change.ticket_id %></td>
-    <td><%= link_to 'Show', status_change %></td>
-    <td><%= link_to 'Edit', edit_status_change_path(status_change) %></td>
-    <td><%= link_to 'Destroy', status_change, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = StatusChange -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:from_status) %></th>
+      <th><%= model_class.human_attribute_name(:to_status) %></th>
+      <th><%= model_class.human_attribute_name(:ticket_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @status_changes.each do |status_change| %>
+      <tr>
+        <td><%= link_to status_change.id, status_change_path(status_change) %></td>
+        <td><%= status_change.from_status %></td>
+        <td><%= status_change.to_status %></td>
+        <td><%= status_change.ticket_id %></td>
+        <td><%=l status_change.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_status_change_path(status_change), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      status_change_path(status_change),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Status change', new_status_change_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_status_change_path,
+            :class => 'btn btn-primary' %>
