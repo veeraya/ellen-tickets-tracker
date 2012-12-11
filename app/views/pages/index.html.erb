@@ -1,8 +1,39 @@
 <div class="row-fluid">
-  <div class="span6">
-    <h1>Hello, world!</h1>
+  <div class="span5 offset1">
+    <p>Tickets currently available on</p>
+    <h1><%= @avail_num %> date<%= "s" if @avail_num > 0 %></h1>
+    <br />
+    <p>Tickets last available</p>
+    <% if @avail_num > 0 %>
+    <h1>Now</h1>
+    <% else %>
+    <h1>
+      <% if @last_avail_day_ago > 0 %>
+        <%= @last_avail_day_ago %> day<%= "s" if @last_avail_day_ago > 0 %> 
+      <% end %>
+      
+      <% if @last_avail_hr_ago > 0 %>
+        <%= @last_avail_hr_ago %> hour<%= "s" if @last_avail_hr_ago > 0 %>
+      <% end %>
+      
+      <%= "Less than 1 hour" if @last_avail_day_ago == 0 && @last_avail_hr_ago == 0 %>
+      
+      ago</h1>
+    <% end %>
+    
+    <br />
+    <p>Tickets are available on the average of</p>
+    <h1>5.46 days</h1>
+    <p>or</p>
+    <h1>3.2 working days</h1>
+    <br />
+    <p>
+      Time period tickets are most likely to be first released as available
+    </p>
+    <h1>7-9PM GST</h1>
+    <br />
   </div>
-  <div class="span6">
+  <div class="span5">
     <form>
       <fieldset>
         <legend>Login</legend>
@@ -18,5 +49,61 @@
       <button type="submit" class="btn">Submit</button>
     </fieldset>
   </form>
+  
+  <label class="radio">
+    <input type="radio" name="optionsRadios" id="optionsRadios1" value="trackAll" checked>
+    Track all ticket dates
+  </label>
+  <label class="radio">
+    <input type="radio" name="optionsRadios" id="optionsRadios2" value="trackSome">
+    Track only the following dates:
+    <div id="dpwrapper">
+      <input type="text" class="span4 dp date-tracked" disabled> <i class="icon-remove-sign icon-large rmvbtn"></i>
+      <br />
+    </div>
+    <a class="btn" id="more-date-btn" disabled> <i class="icon-plus"></i>
+      Add more date
+    </a>
+  </label>
+  <label class="radio">
+    <input type="radio" name="optionsRadios" id="optionsRadios3" value="trackNone">
+    Don't track any ticket date
+  </label>
+  
+
 </div>
+<div class="span1"></div>
 </div>
+<script>
+
+// Initialize datepicker
+$('.dp').datepicker();
+
+$('#more-date-btn').click(function() {
+  $('#dpwrapper').append('<input type="text" class="span4 dp date-tracked"> <i class="icon-remove-sign icon-large rmvbtn"></i><br />');
+  $('.dp').datepicker();
+});
+
+$('#dpwrapper').on('click', '.rmvbtn', function(event){
+  $(this).next().remove();
+  $(this).prev().remove();
+  $(this).remove();
+} );
+
+$("input:radio").click(function() {
+  if ($(':checked').val() === "trackAll") {
+    $('.dp').attr('disabled', 'disabled');
+    $('#more-date-btn').attr('disabled', 'disabled');
+  }
+  else if ($(':checked').val() === "trackSome") {
+    $('.dp').removeAttr('disabled');
+    $('#more-date-btn').removeAttr('disabled');
+  }
+  else if ($(':checked').val() === "trackNone") {
+    $('.dp').attr('disabled', 'disabled');
+    $('#more-date-btn').attr('disabled', 'disabled');
+  }
+});
+
+
+</script>
