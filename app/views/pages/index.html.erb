@@ -27,6 +27,18 @@
       <button type="submit" class="btn">Submit</button>
     </fieldset>
   </form>
+  <div id="dpfields">
+  <input type="text" class="span4 dp date-tracked"> <i class="icon-remove-sign icon-large"></i><br />
+  
+</div>
+<a class="btn" id="more-date-btn"><i class="icon-plus"></i> Add more dates</a>
 </div>
 <div class="span1"></div>
 </div>
+<script>
+$('.dp').datepicker();
+$('#more-date-btn').click(function() {
+  $('#dpfields').append('<input type="text" class="span4 dp date-tracked"> <i class="icon-remove-sign icon-large"></i><br />');
+  $('.dp').datepicker();
+})
+</script>
