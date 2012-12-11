@@ -28,17 +28,25 @@
     </fieldset>
   </form>
   <div id="dpfields">
-  <input type="text" class="span4 dp date-tracked"> <i class="icon-remove-sign icon-large"></i><br />
+  <input type="text" class="span4 dp date-tracked"> <i class="icon-remove-sign icon-large rmvbtn"></i><br />
   
 </div>
-<a class="btn" id="more-date-btn"><i class="icon-plus"></i> Add more dates</a>
+<a class="btn" id="more-date-btn"><i class="icon-plus"></i> Add more date</a>
 </div>
 <div class="span1"></div>
 </div>
 <script>
+
+// Initialize datepicker
 $('.dp').datepicker();
+
 $('#more-date-btn').click(function() {
-  $('#dpfields').append('<input type="text" class="span4 dp date-tracked"> <i class="icon-remove-sign icon-large"></i><br />');
+  $('#dpfields').append('<input type="text" class="span4 dp date-tracked"> <i class="icon-remove-sign icon-large rmvbtn"></i><br />');
   $('.dp').datepicker();
+})
+
+$('.rmvbtn').click(function(){
+  $(this).prev().remove();
+  $(this).remove();
 })
 </script>
