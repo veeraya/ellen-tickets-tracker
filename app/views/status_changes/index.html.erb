@@ -1,0 +1,27 @@
+<h1>Listing status_changes</h1>
+
+<table>
+  <tr>
+    <th>From status</th>
+    <th>To status</th>
+    <th>Ticket</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @status_changes.each do |status_change| %>
+  <tr>
+    <td><%= status_change.from_status %></td>
+    <td><%= status_change.to_status %></td>
+    <td><%= status_change.ticket_id %></td>
+    <td><%= link_to 'Show', status_change %></td>
+    <td><%= link_to 'Edit', edit_status_change_path(status_change) %></td>
+    <td><%= link_to 'Destroy', status_change, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Status change', new_status_change_path %>

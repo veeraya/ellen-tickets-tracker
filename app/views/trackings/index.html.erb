@@ -1,0 +1,23 @@
+<h1>Listing trackings</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @trackings.each do |tracking| %>
+  <tr>
+    <td><%= tracking.date %></td>
+    <td><%= link_to 'Show', tracking %></td>
+    <td><%= link_to 'Edit', edit_tracking_path(tracking) %></td>
+    <td><%= link_to 'Destroy', tracking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tracking', new_tracking_path %>

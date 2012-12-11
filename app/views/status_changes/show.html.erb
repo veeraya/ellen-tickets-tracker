@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>From status:</b>
+  <%= @status_change.from_status %>
+</p>
+
+<p>
+  <b>To status:</b>
+  <%= @status_change.to_status %>
+</p>
+
+<p>
+  <b>Ticket:</b>
+  <%= @status_change.ticket_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_status_change_path(@status_change) %> |
+<%= link_to 'Back', status_changes_path %>
