@@ -1,10 +1,26 @@
 <div class="row-fluid">
   <div class="span5 offset1">
     <p>Tickets currently available on</p>
-    <h1>0 date(s)</h1>
+    <h1><%= @avail_num %> date<%= "s" if @avail_num > 0 %></h1>
     <br />
     <p>Tickets last available</p>
-    <h1>1 day 23 hours ago</h1>
+    <% if @avail_num > 0 %>
+    <h1>Now</h1>
+    <% else %>
+    <h1>
+      <% if @last_avail_day_ago > 0 %>
+        <%= @last_avail_day_ago %> day<%= "s" if @last_avail_day_ago > 0 %> 
+      <% end %>
+      
+      <% if @last_avail_hr_ago > 0 %>
+        <%= @last_avail_hr_ago %> hour<%= "s" if @last_avail_hr_ago > 0 %>
+      <% end %>
+      
+      <%= "Less than 1 hour" if @last_avail_day_ago == 0 && @last_avail_hr_ago == 0 %>
+      
+      ago</h1>
+    <% end %>
+    
     <br />
     <p>Tickets are available on the average of</p>
     <h1>5.46 days</h1>
@@ -87,8 +103,6 @@ $("input:radio").click(function() {
     $('.dp').attr('disabled', 'disabled');
     $('#more-date-btn').attr('disabled', 'disabled');
   }
-
-   console.log($(":checked").val() + " is checked!" );
 });
 
 
