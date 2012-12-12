@@ -9,15 +9,24 @@ class PagesController < ApplicationController
     end
 
     total_avail_day = 0
+    total_avail_weekday = 0
     from_avail = StatusChange.where("from_status = 'tickets-available'")
     from_avail.each do |avail_end|
       tic = avail_end.ticket  
       avail_start = tic.statusChanges.where("to_status = 'tickets-available' AND created_at < \'#{avail_end.created_at.to_date}\'").order("created_at DESC").first
-      total_avail_day += avail_end.created_at.to_datetime - avail_start.created_at.to_datetime
+      avail_day = avail_end.created_at.to_datetime - avail_start.created_at.to_datetime
+      total_avail_day += avail_day
+
+      if (avail_day > 7.0)
+        total_avail_weekday += avail_day - (2 * (avail_day/7).to_i)
+      elsif (avail_end.created_at.to_datetime.wday < avail_start.created_at.to_datetime.wday)
+        total_avail_weekday += avail_day - 2
+      end
     end
     @avg_avail_day, @avg_avail_hr = (total_avail_day/from_avail.length).divmod(1)
-    @avg_avail_hr = (@avg_avail_hr*24).to_i
+    @avg_avail_hr = (@avg_avail_hr*24).to_i 
 
+    @avg_avail_weekday = '%.2f' % (total_avail_weekday/from_avail.length)
 
   end
 end
