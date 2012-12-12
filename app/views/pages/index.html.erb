@@ -9,11 +9,11 @@
     <% else %>
     <h1>
       <% if @last_avail_day_ago > 0 %>
-        <%= @last_avail_day_ago %> day<%= "s" if @last_avail_day_ago > 0 %> 
+        <%= @last_avail_day_ago %> day<%= "s" if @last_avail_day_ago > 1 %> 
       <% end %>
       
       <% if @last_avail_hr_ago > 0 %>
-        <%= @last_avail_hr_ago %> hour<%= "s" if @last_avail_hr_ago > 0 %>
+        <%= @last_avail_hr_ago %> hour<%= "s" if @last_avail_hr_ago > 1 %>
       <% end %>
       
       <%= "Less than 1 hour" if @last_avail_day_ago == 0 && @last_avail_hr_ago == 0 %>
@@ -23,9 +23,14 @@
     
     <br />
     <p>Tickets are available on the average of</p>
-    <h1>5.46 days</h1>
-    <p>or</p>
-    <h1>3.2 working days</h1>
+    <h1>
+      <% if @avg_avail_day > 0 %>
+        <%= @avg_avail_day %> day<%= "s" if @avg_avail_day > 1 %>
+      <% end %>
+      <% if @avg_avail_hr > 0 %>
+        <%= @avg_avail_hr %> hour<%= "s" if @avg_avail_hr > 1 %>
+      <% end %>
+    </h1>
     <br />
     <p>
       Time period tickets are most likely to be first released as available
