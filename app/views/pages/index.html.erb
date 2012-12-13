@@ -1,13 +1,13 @@
 <div class="row-fluid">
   <div class="span5 offset1">
     <p>Tickets currently available on</p>
-    <h1><%= @avail_num %> date<%= "s" if @avail_num > 1 %></h1>
+    <h1 class="stat"><%= @avail_num %> date<%= "s" if @avail_num > 1 %></h1>
     <br />
     <p>Tickets last available</p>
     <% if @avail_num > 0 %>
-    <h1>Now</h1>
+    <h1 class="stat">Now</h1>
     <% else %>
-    <h1>
+    <h1 class="stat">
       <% if @last_avail_day_ago > 0 %>
         <%= @last_avail_day_ago %> day<%= "s" if @last_avail_day_ago > 1 %> 
       <% end %>
@@ -23,7 +23,7 @@
     
     <br />
     <p>Tickets are available on the average of</p>
-    <h1>
+    <h1 class="stat">
       <% if @avg_avail_day > 0 %>
         <%= @avg_avail_day %> day<%= "s" if @avg_avail_day > 1 %>
       <% end %>
@@ -32,7 +32,7 @@
       <% end %>
     </h1>
     <p>or</p>
-    <h1><%= @avg_avail_weekday %> working days</h1>
+    <h1 class="stat"><%= @avg_avail_weekday %> working days</h1>
     <br />
   </div>
   <div class="span5">
@@ -48,7 +48,7 @@
       <input type="text" placeholder="Type something..">
       <br />
       <br />
-      <button type="submit" class="btn">Submit</button>
+      <button type="submit" class="btn btn-primary">Login/Sign up</button>
     </fieldset>
   </form>
   
@@ -70,8 +70,8 @@
   <label class="radio">
     <input type="radio" name="optionsRadios" id="optionsRadios3" value="trackNone">
     Don't track any ticket date
-  </label>
-  
+  </label><br />
+  <a class="btn btn-primary">Save</a>
 
 </div>
 <div class="span1"></div>
