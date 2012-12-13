@@ -1,7 +1,7 @@
 <div class="row-fluid">
   <div class="span5 offset1">
     <p>Tickets currently available on</p>
-    <h1 class="stat"><%= @avail_num %> date<%= "s" if @avail_num > 1 %></h1>
+    <h1 class="stat"><%= pluralize(@avail_num, "date") %></h1>
     <br />
     <p>Tickets last available</p>
     <% if @avail_num > 0 %>
@@ -9,11 +9,11 @@
     <% else %>
     <h1 class="stat">
       <% if @last_avail_day_ago > 0 %>
-        <%= @last_avail_day_ago %> day<%= "s" if @last_avail_day_ago > 1 %> 
+        <%= @last_avail_day_ago %> <%= pluralize(@last_avail_day_ago, "day") %>
       <% end %>
       
       <% if @last_avail_hr_ago > 0 %>
-        <%= @last_avail_hr_ago %> hour<%= "s" if @last_avail_hr_ago > 1 %>
+        <%= @last_avail_hr_ago %> <%= pluralize(@last_avail_hr_ago, "hour") %>
       <% end %>
       
       <%= "Less than 1 hour" if @last_avail_day_ago == 0 && @last_avail_hr_ago == 0 %>
@@ -25,10 +25,10 @@
     <p>Tickets are available on the average of</p>
     <h1 class="stat">
       <% if @avg_avail_day > 0 %>
-        <%= @avg_avail_day %> day<%= "s" if @avg_avail_day > 1 %>
+        <%= pluralize(@avg_avail_day, "day") %>
       <% end %>
       <% if @avg_avail_hr > 0 %>
-        <%= @avg_avail_hr %> hour<%= "s" if @avg_avail_hr > 1 %>
+        <%= pluralize(@avg_avail_hr, "hour") %>
       <% end %>
     </h1>
     <p>or</p>
