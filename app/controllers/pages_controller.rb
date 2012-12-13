@@ -19,10 +19,11 @@ class PagesController < ApplicationController
 
       if (avail_day > 7.0)
         total_avail_weekday += avail_day - (2 * (avail_day/7).to_i)
-      elsif (avail_end.created_at.to_datetime.wday < avail_start.created_at.to_datetime.wday)
+      elsif (avail_end.created_at.to_datetime.new_offset(-8.0/24).wday < avail_start.created_at.new_offset(-8.0/24).to_datetime.wday)
         total_avail_weekday += avail_day - 2
       end
     end
+
     @avg_avail_day, @avg_avail_hr = (total_avail_day/from_avail.length).divmod(1)
     @avg_avail_hr = (@avg_avail_hr*24).to_i 
 
