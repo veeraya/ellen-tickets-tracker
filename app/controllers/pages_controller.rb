@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
   def index
+    @user = User.new
+    
     @avail_num = Ticket.where(:status => "tickets-available").length
     if @avail_num == 0
       last_avail = StatusChange.where("to_status = 'fully-booked' AND from_status = 'tickets-available'").order("created_at DESC").first.created_at
@@ -30,4 +32,5 @@ class PagesController < ApplicationController
     @avg_avail_weekday = '%.2f' % (total_avail_weekday/from_avail.length)
 
   end
+
 end

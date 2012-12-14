@@ -80,4 +80,59 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def login
+    @user = User.where(:email => params[:email]).first
+    unless @user
+      @user = User.create(:email => params[:email], :track_all => false)
+    end
+
+    if @user.track_all
+      @track_all = true
+    elsif @user.trackings.count > 0
+      @track_some = true
+      @trackings = @user.trackings
+    else
+      @track_none = true
+    end
+
+    @track_all ||= false
+    @track_some ||= false
+    @track_none ||= false
+  end
+
+  def update_tracking
+    @user = User.find(params[:user_id])
+
+    case params[:tracking]
+      when "trackAll"
+        @user.track_all = true
+        @user.trackings.destroy_all
+      when "trackSome"
+        @user.track_all = false
+        @user.trackings.destroy_all
+        
+        i = 0
+        fieldname = "datetracked_0"
+        while params[fieldname]
+          date = Date.strptime(params[fieldname], '%m/%d/%Y') rescue nil
+          if date
+            t = Tracking.where(:date => date).first
+            unless t
+              t = Tracking.create(:date => date)
+            end
+            @user.trackings.push(t)
+          end
+
+          i += 1
+          fieldname = "datetracked_#{i}"
+        end
+      when "trackNone"
+          @user.track_all = false
+          @user.trackings.destroy_all
+      else
+    end
+    
+    binding.pry
+  end
 end

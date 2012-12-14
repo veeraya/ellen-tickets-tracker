@@ -6,6 +6,9 @@ Ellen::Application.routes.draw do
   resources :users
   resources :trackings
 
+  match 'login' => 'users#login'
+  match 'update_tracking' => 'users#update_tracking'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

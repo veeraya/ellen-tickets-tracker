@@ -35,44 +35,16 @@
     <h1 class="stat"><%= @avg_avail_weekday %> working days</h1>
     <br />
   </div>
-  <div class="span5">
-    <form>
-      <fieldset>
-        <legend>Login</legend>
-        <label>
-          Email
-          <a href="#" rel="popover" id="why-email" data-placement="right" data-content="You will only receive notification for the date you select in the next step. I will not send you spam or newsletter of any kind. Your email will <strong>not</strong>
-          C be sold to a third-party." data-original-title="What your email will be used for">?
-        </a>
-      </label>
-      <input type="text" placeholder="Type something..">
-      <br />
-      <br />
-      <button type="submit" class="btn btn-primary">Login/Sign up</button>
-    </fieldset>
-  </form>
-  
-  <label class="radio">
-    <input type="radio" name="optionsRadios" id="optionsRadios1" value="trackAll" checked>
-    Track all ticket dates
-  </label>
-  <label class="radio">
-    <input type="radio" name="optionsRadios" id="optionsRadios2" value="trackSome">
-    Track only the following dates:
-    <div id="dpwrapper">
-      <input type="text" class="span4 dp date-tracked" disabled> <i class="icon-remove-sign icon-large rmvbtn"></i>
-      <br />
-    </div>
-    <a class="btn" id="more-date-btn" disabled> <i class="icon-plus"></i>
-      Add more date
-    </a>
-  </label>
-  <label class="radio">
-    <input type="radio" name="optionsRadios" id="optionsRadios3" value="trackNone">
-    Don't track any ticket date
-  </label><br />
-  <a class="btn btn-primary">Save</a>
+  <div class="span5" id="formwrapper">
 
+  <%= form_tag("/login", :method => "post", :remote => "true", :id => "loginform") do %>
+    <%= label_tag(:email, "Email") %>
+    <%= text_field_tag(:email) %><br />
+    <%= submit_tag("Login/Sign up", :class=> "btn btn-primary") %>
+  <% end %>
+  
+  
+    
 </div>
 <div class="span1"></div>
 </div>
@@ -81,30 +53,38 @@
 // Initialize datepicker
 $('.dp').datepicker();
 
-$('#more-date-btn').click(function() {
-  $('#dpwrapper').append('<input type="text" class="span4 dp date-tracked"> <i class="icon-remove-sign icon-large rmvbtn"></i><br />');
-  $('.dp').datepicker();
+$('#formwrapper').on('click', '#more-date-btn', function(event){
+    $('#dpwrapper').append('<input type="text" class="span4 dp date-tracked" id="datetracked_' + ($('.dp').length) + '" name="datetracked_' + ($('.dp').length) + '"> <i class="icon-remove-sign icon-large rmvbtn"></i><br />');
+    $('.dp').datepicker();
 });
 
-$('#dpwrapper').on('click', '.rmvbtn', function(event){
+
+$('#formwrapper').on('click', '.rmvbtn', function(event){
   $(this).next().remove();
   $(this).prev().remove();
   $(this).remove();
-} );
 
-$("input:radio").click(function() {
-  if ($(':checked').val() === "trackAll") {
-    $('.dp').attr('disabled', 'disabled');
-    $('#more-date-btn').attr('disabled', 'disabled');
-  }
-  else if ($(':checked').val() === "trackSome") {
-    $('.dp').removeAttr('disabled');
-    $('#more-date-btn').removeAttr('disabled');
-  }
-  else if ($(':checked').val() === "trackNone") {
-    $('.dp').attr('disabled', 'disabled');
-    $('#more-date-btn').attr('disabled', 'disabled');
-  }
+  $('.dp').each(function(i, dpfield){
+    console.log(dpfield);
+    console.log(i);
+    dpfield.id = 'datetracked_' + i;
+    dpfield.name = 'datetracked_' + i;
+  })
+});
+
+$('#formwrapper').on('click', 'input:radio', function(event){
+    if ($(':checked').val() === "trackAll") {
+      $('.dp').attr('disabled', 'disabled');
+      $('#more-date-btn').attr('disabled', 'disabled');
+    }
+    else if ($(':checked').val() === "trackSome") {
+      $('.dp').removeAttr('disabled');
+      $('#more-date-btn').removeAttr('disabled');
+    }
+    else if ($(':checked').val() === "trackNone") {
+      $('.dp').attr('disabled', 'disabled');
+      $('#more-date-btn').attr('disabled', 'disabled');
+    }
 });
 
 

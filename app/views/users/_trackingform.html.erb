@@ -1,0 +1,34 @@
+<%= form_tag("/update_tracking", :method =>
+"post", :remote => "true") do %>
+<fieldset>
+    <legend>Trackings</legend>
+    <label class="radio">
+        <%= hidden_field_tag 'user_id', @user.id %>
+        <%= radio_button_tag(:tracking, "trackAll", @track_all) %>Track all ticket dates</label>
+    <label class="radio">
+        <%= radio_button_tag(:tracking, "trackSome", @track_some) %>
+        Track only the following dates:
+        <div id="dpwrapper">
+            <% if defined? @trackings %>
+            <% i = 0 %>
+                <% @trackings.each do |t| %>
+                <%= text_field_tag("datetracked_#{i}", t.date.strftime('%m/%d/%Y'), :class =>
+                "span4 dp date-tracked") %> <i class="icon-remove-sign icon-large rmvbtn"></i>
+                <br />
+                <% i += 1 %>
+                <% end %>
+            <% else %>
+            <%= text_field_tag(:datetracked_0, nil, :class =>
+            "span4 dp date-tracked", :disabled => true) %> <i class="icon-remove-sign icon-large rmvbtn"></i>
+            <br />
+            <% end %></div>
+        <a class="btn" id="more-date-btn" disabled>
+            <i class="icon-plus"></i>
+            Add more date
+        </a>
+    </label>
+    <label class="radio">
+        <%= radio_button_tag(:tracking, "trackNone", @track_none) %>Don't track any ticket date</label>
+    <br />
+    <%= submit_tag("Save", :class=>"btn btn-primary") %></fieldset>
+<% end %>
