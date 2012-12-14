@@ -1,7 +1,7 @@
 <%= form_tag("/update_tracking", :method =>
 "post", :remote => "true") do %>
 <fieldset>
-    <legend>Trackings</legend>
+    <legend id="legend">Trackings</legend>
     <label class="radio">
         <%= hidden_field_tag 'user_id', @user.id %>
         <%= radio_button_tag(:tracking, "trackAll", @track_all) %>Track all ticket dates</label>

@@ -103,36 +103,51 @@ class UsersController < ApplicationController
 
   def update_tracking
     @user = User.find(params[:user_id])
-
-    case params[:tracking]
-      when "trackAll"
-        @user.track_all = true
-        @user.trackings.destroy_all
-      when "trackSome"
-        @user.track_all = false
-        @user.trackings.destroy_all
-        
-        i = 0
-        fieldname = "datetracked_0"
-        while params[fieldname]
-          date = Date.strptime(params[fieldname], '%m/%d/%Y') rescue nil
-          if date
-            t = Tracking.where(:date => date).first
-            unless t
-              t = Tracking.create(:date => date)
-            end
-            @user.trackings.push(t)
-          end
-
-          i += 1
-          fieldname = "datetracked_#{i}"
-        end
-      when "trackNone"
+    if @user
+      case params[:tracking]
+        when "trackAll"
+          @user.track_all = true
+          @user.trackings.destroy_all
+        when "trackSome"
           @user.track_all = false
           @user.trackings.destroy_all
-      else
+          
+          error_fields = []
+          i = 0
+          fieldname = "datetracked_0"
+          while params[fieldname]
+            date = Date.strptime(params[fieldname], '%m/%d/%Y') rescue nil
+            if date
+              t = Tracking.where(:date => date).first
+              unless t
+                t = Tracking.create(:date => date)
+              end
+              @user.trackings.push(t)
+            else
+              error_fields.push(fieldname)
+            end
+
+            i += 1
+            fieldname = "datetracked_#{i}"
+          end
+
+          if error_fields.count > 0
+            @error_msg = "Error parsing the following date(s): "
+            error_fields.each do |f|
+              @error_msg << " #{params[f]} "
+            end
+            @error_msg << ". Accepted date format is mm/dd/yyyy."
+
+          end
+        when "trackNone"
+            @user.track_all = false
+            @user.trackings.destroy_all
+        else
+      end
+    else
+      @error_msg = "You're not registered in the database. Please try logging in again."
     end
-    
+
     binding.pry
   end
 end
