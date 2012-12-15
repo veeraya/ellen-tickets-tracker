@@ -7,6 +7,7 @@ Ellen::Application.routes.draw do
   resources :trackings
 
   match 'login' => 'users#login'
+  match 'logout' => 'pages#show_login'
   match 'update_tracking' => 'users#update_tracking'
 
   # The priority is based upon order of creation:

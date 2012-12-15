@@ -1,2 +1,3 @@
-$('#loginform').hide().after('<%= j render ("trackingform") %>');
+$('#loginform').remove();
+$('#formwrapper').append('<%= j render ("trackingform") %>');
 $('.dp').datepicker();

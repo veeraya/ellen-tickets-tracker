@@ -33,4 +33,7 @@ class PagesController < ApplicationController
 
   end
 
+  def show_login
+  end
+
 end

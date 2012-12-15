@@ -1,0 +1,5 @@
+<%= form_tag("/login", :method => "post", :remote => "true", :id => "loginform") do %>
+  <%= label_tag(:email, "Email") %>
+  <%= text_field_tag(:email) %><br />
+  <%= submit_tag("Login/Sign up", :class=> "btn btn-primary") %>
+<% end %>

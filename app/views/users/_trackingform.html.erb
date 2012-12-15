@@ -1,5 +1,5 @@
 <%= form_tag("/update_tracking", :method =>
-"post", :remote => "true") do %>
+"post", :remote => "true", :id => "trackingsform") do %>
 <fieldset>
     <legend id="legend">Trackings</legend>
     <label class="radio">
@@ -37,5 +37,6 @@
     <label class="radio">
         <%= radio_button_tag(:tracking, "trackNone", @track_none) %>Don't track any ticket date</label>
     <br />
-    <%= submit_tag("Save", :class=>"btn btn-primary") %></fieldset>
+    <%= submit_tag("Save", :class=>"btn btn-success") %>
+    <%= link_to "Log out", "/logout", class: "btn btn-danger", remote: true %></fieldset>
 <% end %>
