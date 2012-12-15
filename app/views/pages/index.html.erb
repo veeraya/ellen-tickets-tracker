@@ -9,11 +9,11 @@
     <% else %>
     <h1 class="stat">
       <% if @last_avail_day_ago > 0 %>
-        <%= @last_avail_day_ago %> <%= pluralize(@last_avail_day_ago, "day") %>
+        <%= pluralize(@last_avail_day_ago, "day") %>
       <% end %>
       
       <% if @last_avail_hr_ago > 0 %>
-        <%= @last_avail_hr_ago %> <%= pluralize(@last_avail_hr_ago, "hour") %>
+        <%= pluralize(@last_avail_hr_ago, "hour") %>
       <% end %>
       
       <%= "Less than 1 hour" if @last_avail_day_ago == 0 && @last_avail_hr_ago == 0 %>
@@ -50,7 +50,7 @@
 </div>
 <script>
 $(document).ready(function(){ 
-  
+
   $('#formwrapper').on('click', '#more-date-btn', function(event){
       $('#dpwrapper').append('<div class="control-group"><div class="controls"><input type="text" class="span4 dp date-tracked" id="datetracked_' + ($('.dp').length) + '" name="datetracked_' + ($('.dp').length) + '"> <i class="icon-remove-sign icon-large rmvbtn"></i></div></div>');
       $('.dp').datepicker();
