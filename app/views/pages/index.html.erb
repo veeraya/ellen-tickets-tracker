@@ -49,43 +49,38 @@
 <div class="span1"></div>
 </div>
 <script>
+$(document).ready(function(){ 
+  
+  $('#formwrapper').on('click', '#more-date-btn', function(event){
+      $('#dpwrapper').append('<div class="control-group"><div class="controls"><input type="text" class="span4 dp date-tracked" id="datetracked_' + ($('.dp').length) + '" name="datetracked_' + ($('.dp').length) + '"> <i class="icon-remove-sign icon-large rmvbtn"></i></div></div>');
+      $('.dp').datepicker();
+  });
 
-// Initialize datepicker
-$('.dp').datepicker();
 
-$('#formwrapper').on('click', '#more-date-btn', function(event){
-    $('#dpwrapper').append('<input type="text" class="span4 dp date-tracked" id="datetracked_' + ($('.dp').length) + '" name="datetracked_' + ($('.dp').length) + '"> <i class="icon-remove-sign icon-large rmvbtn"></i><br />');
-    $('.dp').datepicker();
+  $('#formwrapper').on('click', '.rmvbtn', function(event){
+    $(this).parent().parent().remove();
+
+    $('.dp').each(function(i, dpfield){
+      console.log(dpfield);
+      console.log(i);
+      dpfield.id = 'datetracked_' + i;
+      dpfield.name = 'datetracked_' + i;
+    })
+  });
+
+  $('#formwrapper').on('click', 'input:radio', function(event){
+      if ($(':checked').val() === "trackAll") {
+        $('.dp').attr('disabled', 'disabled');
+        $('#more-date-btn').attr('disabled', 'disabled');
+      }
+      else if ($(':checked').val() === "trackSome") {
+        $('.dp').removeAttr('disabled');
+        $('#more-date-btn').removeAttr('disabled');
+      }
+      else if ($(':checked').val() === "trackNone") {
+        $('.dp').attr('disabled', 'disabled');
+        $('#more-date-btn').attr('disabled', 'disabled');
+      }
+  });
 });
-
-
-$('#formwrapper').on('click', '.rmvbtn', function(event){
-  $(this).next().remove();
-  $(this).prev().remove();
-  $(this).remove();
-
-  $('.dp').each(function(i, dpfield){
-    console.log(dpfield);
-    console.log(i);
-    dpfield.id = 'datetracked_' + i;
-    dpfield.name = 'datetracked_' + i;
-  })
-});
-
-$('#formwrapper').on('click', 'input:radio', function(event){
-    if ($(':checked').val() === "trackAll") {
-      $('.dp').attr('disabled', 'disabled');
-      $('#more-date-btn').attr('disabled', 'disabled');
-    }
-    else if ($(':checked').val() === "trackSome") {
-      $('.dp').removeAttr('disabled');
-      $('#more-date-btn').removeAttr('disabled');
-    }
-    else if ($(':checked').val() === "trackNone") {
-      $('.dp').attr('disabled', 'disabled');
-      $('#more-date-btn').attr('disabled', 'disabled');
-    }
-});
-
-
 </script>

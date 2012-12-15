@@ -1,10 +1,20 @@
-$('html').after('<%= include_gon %>');
-console.log(gon);
-$('.alert').remove();
-$('#legend').after('<%= j render ("alertbox") %>');
-$.each(gon.empty_fields, function(index, field) { 
-  var c = "#" + field;
-  $(c).next().remove();
-  $(c).next().remove();
-  $(c).remove();
+$(document).ready(function(){ 
+  $('html').after('<%= include_gon %>');
+  $('.alert').remove();
+  $('.error').attr('class', 'control-group');
+  $('#legend').after('<%= j render ("alertbox") %>');
+  $.each(gon.empty_fields, function(index, field) { 
+    var id = "#" + field;
+    $(id).parent().parent().remove();
+  });
+
+  $.each(gon.error_fields, function(index, field) { 
+    var id = "#" + field;
+    $(id).parent().parent().attr('class', 'control-group error');
+  });
+
+
+  if (gon.track_all || gon.track_none){
+
+  }
 });
