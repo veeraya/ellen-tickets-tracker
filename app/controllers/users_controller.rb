@@ -113,18 +113,23 @@ class UsersController < ApplicationController
           @user.trackings.destroy_all
           
           error_fields = []
+          empty_fields = []
           i = 0
           fieldname = "datetracked_0"
           while params[fieldname]
-            date = Date.strptime(params[fieldname], '%m/%d/%Y') rescue nil
-            if date
-              t = Tracking.where(:date => date).first
-              unless t
-                t = Tracking.create(:date => date)
-              end
-              @user.trackings.push(t)
+            if params[fieldname].empty?
+              empty_fields.push(fieldname)
             else
-              error_fields.push(fieldname)
+              date = Date.strptime(params[fieldname], '%m/%d/%Y') rescue nil
+              if date
+                t = Tracking.where(:date => date).first
+                unless t
+                  t = Tracking.create(:date => date)
+                end
+                @user.trackings.push(t)
+              else
+                error_fields.push(fieldname)
+              end
             end
 
             i += 1
@@ -139,6 +144,10 @@ class UsersController < ApplicationController
             @error_msg << ". Accepted date format is mm/dd/yyyy."
 
           end
+
+          gon.error_fields = error_fields
+          gon.empty_fields = empty_fields
+          
         when "trackNone"
             @user.track_all = false
             @user.trackings.destroy_all
@@ -148,6 +157,5 @@ class UsersController < ApplicationController
       @error_msg = "You're not registered in the database. Please try logging in again."
     end
 
-    binding.pry
   end
 end

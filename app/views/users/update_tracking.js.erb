@@ -1,2 +1,10 @@
+$('html').after('<%= include_gon %>');
+console.log(gon);
 $('.alert').remove();
 $('#legend').after('<%= j render ("alertbox") %>');
+$.each(gon.empty_fields, function(index, field) { 
+  var c = "#" + field;
+  $(c).next().remove();
+  $(c).next().remove();
+  $(c).remove();
+});
