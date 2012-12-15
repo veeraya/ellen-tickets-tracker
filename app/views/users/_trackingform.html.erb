@@ -13,19 +13,23 @@
             <% i = 0 %>
                 <% @trackings.each do |t| %>
                 <div class="control-group">
-                  <div class="controls">
-                <%= text_field_tag("datetracked_#{i}", t.date.strftime('%m/%d/%Y'), :class =>
-                "span4 dp date-tracked") %> <i class="icon-remove-sign icon-large rmvbtn"></i>
-                  </div>
+                    <div class="controls">
+                        <%= text_field_tag("datetracked_#{i}", t.date.strftime('%m/%d/%Y'), :class =>
+                        "span4 dp date-tracked") %> <i class="icon-remove-sign icon-large rmvbtn"></i>
+                    </div>
                 </div>
                 <% i += 1 %>
                 <% end %>
             <% else %>
-            <%= text_field_tag(:datetracked_0, nil, :class =>
-            "span4 dp date-tracked", :disabled => true) %> <i class="icon-remove-sign icon-large rmvbtn"></i>
-            <br />
+            <div class="control-group">
+                <div class="controls">
+                    <%= text_field_tag(:datetracked_0, nil, :class =>
+                    "span4 dp date-tracked", :disabled => true) %> <i class="icon-remove-sign icon-large rmvbtn"></i>
+                </div>
+            </div>
             <% end %></div>
-        <a class="btn" id="more-date-btn" <%= "disabled" unless defined? @trackings %>>
+        <a class="btn" id="more-date-btn" <%= "disabled" unless defined? @trackings %>
+            >
             <i class="icon-plus"></i>
             Add more date
         </a>
