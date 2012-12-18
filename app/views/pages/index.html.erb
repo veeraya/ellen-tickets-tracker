@@ -1,4 +1,9 @@
 <div class="row-fluid">
+  <div class="span4 offset1" id="formwrapper">
+  
+  <%= render ("loginform") %>
+    
+  </div>
   <div class="span5 offset1">
     <p>Tickets currently available on</p>
     <h1 class="stat"><%= pluralize(@avail_num, "date") %></h1>
@@ -35,11 +40,7 @@
     <h1 class="stat"><%= @avg_avail_weekday %> working days</h1>
     <br />
   </div>
-  <div class="span5" id="formwrapper">
-  
-  <%= render ("loginform") %>
-    
-</div>
+
 <div class="span1"></div>
 </div>
 <script>

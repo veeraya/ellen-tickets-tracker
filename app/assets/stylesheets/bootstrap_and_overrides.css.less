@@ -31,7 +31,11 @@
 // Example:
 // @linkColor: #ff0000;
 
-@baseFontFamily:    Open Sans;  @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Dancing+Script);
+@import url(http://fonts.googleapis.com/css?family=Josefin+Sans);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+@baseFontFamily: Josefin Sans;  
 @baseFontSize:  20px;
 @baseLineHeight:  25px;
 @btnPrimaryBackground:  #2D6997;
@@ -44,21 +48,26 @@
 body {
   background-image: url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/gray_jean.png);
   color: #22373B;
-}
-
-h1 {
-  font-weight: 400;
+  font-family: "Josefin Sans","Open Sans", sans-serif;
 }
  
 .stat {
-  color: #222;
-  text-shadow: 1px 1px 3px #555;
+  color: #333;
+  font-weight: 600;
+  text-shadow: 1 1px 0 white;
 }
 
 label {
   cursor: default;
 }
+
+.btn {
+  font-family: "Open Sans", sans-serif;
+}
+
+
 .navbar-inner{
+  font-family: "Dancing Script"; 
   min-height: 60px;
   padding-top: 20px;
   border: 0px;
@@ -69,4 +78,9 @@ label {
   box-shadow: 0px;
   -moz-box-shadow: 0px;
   background: rgba(255, 255, 255, 0.6);
+}
+
+legend {
+  line-height: 35px;
+  font-weight: bold;
 }
