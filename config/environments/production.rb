@@ -80,7 +80,7 @@ Ellen::Application.configure do
 
 
   # for Devise to work
-  config.action_mailer.default_url_options = { :host => 'www.ellentickettracker.com' }
+  config.action_mailer.default_url_options = { :host => 'gmail.com' }
 
 
   # Configure Rails to use pry instead of IRB
