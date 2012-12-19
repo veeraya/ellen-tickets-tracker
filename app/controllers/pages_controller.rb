@@ -36,4 +36,14 @@ class PagesController < ApplicationController
   def show_login
   end
 
+  def unsubscribe
+    email = params[:email].gsub(/\[at\]/, '@')
+    user = User.where(:email => email).first
+    if user
+      user.trackings.destroy_all
+      @success = true
+    else
+      @success = false
+    end
+  end
 end

@@ -11,6 +11,7 @@ Ellen::Application.routes.draw do
   match 'login' => 'users#login'
   match 'logout' => 'pages#show_login'
   match 'update_tracking' => 'users#update_tracking'
+  match 'unsubscribe' => 'pages#unsubscribe'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
