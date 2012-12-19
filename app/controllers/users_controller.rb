@@ -155,6 +155,7 @@ class UsersController < ApplicationController
             @user.trackings.destroy_all
         else
       end
+      @user.save
     else
       @error_msg = "You're not registered in the database. Please try logging in again."
     end

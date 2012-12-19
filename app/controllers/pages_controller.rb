@@ -41,6 +41,8 @@ class PagesController < ApplicationController
     user = User.where(:email => email).first
     if user
       user.trackings.destroy_all
+      user.track_all = false
+      user.save
       @success = true
     else
       @success = false
