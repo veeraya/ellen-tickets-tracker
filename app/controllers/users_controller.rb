@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :check_admin
+  before_filter :check_admin, :only => [:index, :show, :new, :edit, :create, :update, :destroy]
   
   # GET /users
   # GET /users.json
