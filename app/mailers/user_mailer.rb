@@ -3,6 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def notification_email(params)
     @tickets = params['tickets']
-    mail(:to => params['email'], :subject => "Ellen ticket show status change!")
+    @email = params['email'].gsub(/@/, '[at]')
+    mail(:to => params['email'], :subject => "The Ellen DeGeneres Show Tickets Update")
   end
 end
