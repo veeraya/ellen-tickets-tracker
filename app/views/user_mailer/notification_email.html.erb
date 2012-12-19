@@ -1,4 +1,21 @@
-<b>Here are the changes!</b><br />
+<%= render :partial => 'top' %>
+
 <% @tickets.each do |ticket| %>
-<%= ticket.date %>: <%= ticket.status %><br />
+  <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;background-color: whitesmoke;">
+  <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;">
+      <%= ticket.date.strftime('%B %d, %Y') %>
+    </td>
+    <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;">
+      <% if ticket.status == "fully-booked" %>
+        Fully booked
+      <% elsif ticket.status == "tickets-available" %>
+        Available
+      <% else %>
+      <%= ticket.status %>
+      <% end %>
+    </td>
+  </tr>
 <% end %>
+
+<%= render :partial => 'bottom' %>
+                  
