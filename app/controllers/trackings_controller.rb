@@ -1,4 +1,6 @@
 class TrackingsController < ApplicationController
+  before_filter :check_admin
+  
   # GET /trackings
   # GET /trackings.json
   def index

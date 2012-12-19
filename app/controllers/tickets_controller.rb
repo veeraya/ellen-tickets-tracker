@@ -1,4 +1,6 @@
 class TicketsController < ApplicationController
+  before_filter :check_admin
+  
   # GET /tickets
   # GET /tickets.json
   def index

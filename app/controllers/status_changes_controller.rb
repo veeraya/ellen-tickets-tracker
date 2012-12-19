@@ -1,4 +1,6 @@
 class StatusChangesController < ApplicationController
+  before_filter :check_admin
+
   # GET /status_changes
   # GET /status_changes.json
   def index

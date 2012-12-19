@@ -78,6 +78,11 @@ Ellen::Application.configure do
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
 
+
+  # for Devise to work
+  config.action_mailer.default_url_options = { :host => 'www.ellentickettracker.com' }
+
+
   # Configure Rails to use pry instead of IRB
   silence_warnings do
     begin

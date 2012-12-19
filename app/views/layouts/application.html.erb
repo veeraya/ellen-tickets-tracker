@@ -45,6 +45,13 @@
       <div class="row-fluid">
       <div class="span10 offset1">
         <h1 id="logotext"><%= link_to "The Ellen DeGeneres Show Ticket Tracker", root_url %></h1>
+          <% if admin_signed_in? %>
+          <%= link_to('Users', users_path) %>
+          <%= link_to('Trackings', trackings_path) %>
+          <%= link_to('Tickets', tickets_path) %>
+          <%= link_to('Status Changes', status_changes_path) %>
+          <%= link_to('Logout', destroy_admin_session_path, :method => :delete) %>        
+          <% end %>
       </div>
       </div>
     </header>

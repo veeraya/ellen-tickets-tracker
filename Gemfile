@@ -37,10 +37,10 @@ gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 gem 'pg', '0.12.2'
-gem 'whenever', :require => false
 gem 'jquery-rails'
 gem "nokogiri"
 gem "gon"
+gem "devise"
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'
